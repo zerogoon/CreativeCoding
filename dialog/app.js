@@ -13,7 +13,7 @@ class App {
         this.curItem = null;
 
         this.items = [];
-        this.total = 1;
+        this.total = 5;
         for (let i = 0; i < this.total; i++) {
             this.items[i] = new Dialog();
         }
@@ -36,7 +36,7 @@ class App {
         this.canvas.height = this.stageHeight * this.pixelRatio;
         this.ctx.scale(this.pixelRatio, this.pixelRatio);
 
-        this.ctx.shadowOffsetX = 0;
+        this.ctx.shadowOffsetX = 0
         this.ctx.shadowOffsetY = 3;
         this.ctx.shadowBlur = 6;
         this.ctx.shadowColor = `rgba(0, 0, 0, 0.1)`;
@@ -56,13 +56,31 @@ class App {
         for (let i = 0; i < this.items.length; i++) {
             this.items[i].animate(this.ctx);
         }
+
+        if (this.curItem) {
+            this.ctx.fillStyle = `#ff4338`;
+            this.ctx.strokeStyle = `#ff4338`;
+
+            this.ctx.beginPath();
+            this.ctx.arc(this.curItem.mousePos.x, this.curItem.mousePos.y, 8, 0, Math.PI * 2);
+            this.ctx.fill();
+
+            this.ctx.beginPath();
+            this.ctx.arc(this.curItem.centerPos.x, this.curItem.centerPos.y, 8, 0, Math.PI * 2);
+            this.ctx.fill();
+
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.mousePos.x, this.mousePos.y);
+            this.ctx.lineTo(this.curItem.centerPos.x, this.curItem.centerPos.y);
+            this.ctx.stroke();
+        }
     }
 
     onDown(e) {
         this.mousePos.x = e.clientX;
         this.mousePos.y = e.clientY;
 
-        for (let i = this.items.length -1; i >= 0; i--) {
+        for (let i = this.items.length - 1; i >= 0; i--) {
             const item = this.items[i].down(this.mousePos.clone());
             if (item) {
                 this.curItem = item;

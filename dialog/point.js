@@ -17,8 +17,8 @@ export class Point {
     }
 
     reduce(value) {
-        this.x *= value.x;
-        this.y *= value.y;
+        this.x *= value;
+        this.y *= value;
         return this;
     }
 

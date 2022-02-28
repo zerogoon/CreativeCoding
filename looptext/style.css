@@ -1,0 +1,20 @@
+body {
+  font-family: "Titillium Web", sans-serif;
+  font-size: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.menu--item {
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+  cursor: pointer;
+  text-shadow: 5px 5px white, 5px 5px rgba(0, 0, 0, 0.1), 10px 10px rgba(0, 0, 0, 0.1);
+}

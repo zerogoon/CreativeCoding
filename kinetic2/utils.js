@@ -19,18 +19,18 @@ export function linePoint(x1, y1, x2, y2, px, py) {
     const lineLength = distance(x1, y1, x2, y2);
     const buffer = 0.1;
 
-    if (dis >= lineLength - buffer && dist <= lineLength + buffer) {
+    if (dist >= lineLength - buffer && dist <= lineLength + buffer) {
         return true;
     } else {
         return false;
     }
 }
 
-export function lineCircle(x1, y1, x2, y2, cx, cy) {
+export function lineCircle(x1, y1, x2, y2, cx, cy, r) {
     const lineLength = distance(x1, y1, x2, y2);
 
     const point = (((cx - x1) * (x2 - x1)) + 
-    ((cx - y1) * (y2 - y1))) / Math.pow(lineLength, 2);
+    ((cy - y1) * (y2 - y1))) / Math.pow(lineLength, 2);
 
     const px = x1 + (point * (x2 - x1));
     const py = y1 + (point * (y2 - y1));

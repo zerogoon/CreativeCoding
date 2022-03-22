@@ -1,3 +1,5 @@
+import { Visual } from "./visual.js";
+
 class App {
     constructor() {
         this.setWebgl();
@@ -7,7 +9,9 @@ class App {
                 families: ["Hind: 700"],
             },
             fontactive: () => {
-                window.addEventListener('resize', this.resize.bind(this), false);
+                this.visual = new Visual();
+
+                window.addEventListener("resize", this.resize.bind(this), false);
                 this.resize();
 
                 requestAnimationFrame(this.animate.bind(this));
@@ -21,7 +25,7 @@ class App {
             height: document.body.clientHeight,
             antialias: true,
             transparent: false,
-            resolution: (window.devicePixelRatio > 1) ? 2 : 1,
+            resolution: window.devicePixelRatio > 1 ? 2 : 1,
             autoDensity: true,
             powerPreference: "high-performance",
             backgroundColor: 0xffffff,
@@ -36,10 +40,14 @@ class App {
         this.stageHeight = document.body.clientHeight;
 
         this.renderer.resize(this.stageWidth, this.stageHeight);
+
+        this.visual.show(this.stageWidth, this.stageHeight, this.stage);
     }
 
     animate(t) {
         requestAnimationFrame(this.animate.bind(this));
+
+        this.visual.animate();
 
         this.renderer.render(this.stage);
     }

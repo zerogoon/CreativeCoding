@@ -1,10 +1,10 @@
 export class Text {
     constructor() {
         this.canvas = document.createElement("canvas");
-        this.canvas.style.position = "absolute";
-        this.canvas.style.left = "0";
-        this.canvas.style.top = "0";
-        document.body.appendChild(this.canvas);
+        // this.canvas.style.position = "absolute";
+        // this.canvas.style.left = "0";
+        // this.canvas.style.top = "0";
+        // document.body.appendChild(this.canvas);
 
         this.ctx = this.canvas.getContext("2d");
     }
@@ -28,7 +28,7 @@ export class Text {
         return this.dotPos(density, stageWidth, stageHeight);
     }
 
-    dotPos(dnesity, stageWidth, stageHeight) {
+    dotPos(density, stageWidth, stageHeight) {
         const imageData = this.ctx.getImageData(0, 0, stageWidth, stageHeight).data;
 
         const particles = [];
@@ -36,10 +36,25 @@ export class Text {
         let width = 0;
         let pixel;
 
-        for (height = 0; height < stageHeight; height += density) {
+        for (let height = 0; height < stageHeight; height += density) {
             i++;
             const slide = i % 2 == 0;
             width = 0;
+            if (slide == 1) {
+                width += 6;
+            }
+
+            for (width; width < stageWidth; width += density) {
+                pixel = imageData[(width + height * stageWidth) * 4 - 1];
+                if (pixel != 0 && width > 0 && width < stageWidth && height > 0 && height < stageHeight) {
+                    particles.push({
+                        x: width,
+                        y: height,
+                    });
+                }
+            }
         }
+
+        return particles;
     }
 }

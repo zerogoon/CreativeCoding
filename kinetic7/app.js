@@ -20,7 +20,7 @@ class App {
     }
 
     setWebgl() {
-        this.renderer = new PIXI.Render({
+        this.renderer = new PIXI.Renderer({
             width: document.body.clientWidth,
             height: document.body.clientHeight,
             antialias: true,
